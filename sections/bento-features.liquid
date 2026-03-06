@@ -1,0 +1,134 @@
+{{ 'section-bento.css' | asset_url | stylesheet_tag }}
+
+<section class="section section-padding bento-features" id="features">
+  <div class="page-width">
+    <div class="text-center">
+      <span class="text-overline" style="display: block; margin-bottom: var(--space-sm); color: var(--green-500);">{{ section.settings.overline | default: 'Kenmerken' }}</span>
+      <h2 class="text-h2 mb-lg reveal">{{ section.settings.heading | default: 'Waarom Mosstop?' }}</h2>
+    </div>
+
+    <div class="bento-grid stagger">
+      {%- for block in section.blocks -%}
+        <div class="bento-card {{ block.settings.size }} reveal" {{ block.shopify_attributes }} style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms;">
+          <div class="bento-card__icon">{{ block.settings.icon_emoji }}</div>
+          <h3 class="bento-card__title">{{ block.settings.title }}</h3>
+          <p class="bento-card__text">{{ block.settings.text }}</p>
+
+          {%- if block.settings.size == 'large' -%}
+            <div class="molecule-animation" aria-hidden="true"></div>
+          {%- endif -%}
+          {%- if block.settings.has_animation -%}
+            <div class="shield-animation" aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bento Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Kenmerken"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Waarom Mosstop?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Card size",
+          "options": [
+            { "value": "large", "label": "Large (2x2)" },
+            { "value": "medium", "label": "Medium (2x1)" },
+            { "value": "small", "label": "Small (1x1)" }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "text",
+          "id": "icon_emoji",
+          "label": "Icon (emoji)",
+          "default": "🌱"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Feature description goes here."
+        },
+        {
+          "type": "checkbox",
+          "id": "has_animation",
+          "label": "Show micro-animation",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bento Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "size": "large",
+            "icon_emoji": "🧪",
+            "title": "Krachtige Formule",
+            "text": "Wetenschappelijk bewezen formule dringt door tot de wortel van het mos"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "size": "small",
+            "icon_emoji": "🌱",
+            "title": "Eco-Vriendelijk",
+            "text": "Veilig voor huisdieren en planten"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "size": "small",
+            "icon_emoji": "📏",
+            "title": "1L = 50m²",
+            "text": "Ruime dekking per fles"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "size": "medium",
+            "icon_emoji": "🛡️",
+            "title": "12 Maanden Bescherming",
+            "text": "Voorkomt nieuwe mosgroei het hele seizoen",
+            "has_animation": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -56,11 +56,19 @@
     "step_3_title": "Enjoy the results",
     "step_3_text": "Experience the power of moss on your skin."
   },
+  "trust": {
+    "dermatologist": "Dermatologist Approved",
+    "vegan": "Vegan & Cruelty-Free",
+    "guarantee": "30-Day Guarantee",
+    "eu_privacy": "EU Privacy Compliant"
+  },
   "testimonials": {
-    "heading": "What customers say"
+    "heading": "What customers say",
+    "overline": "Customer reviews"
   },
   "faq": {
-    "heading": "Frequently asked questions"
+    "heading": "Frequently asked questions",
+    "overline": "Need help?"
   },
   "cta_banner": {
     "heading": "Ready to discover?",
@@ -82,7 +90,9 @@
   },
   "collection": {
     "heading": "Collection",
+    "overline": "Collection",
     "products_count": "{{ count }} products",
+    "product_count": "products",
     "no_products": "No products found.",
     "all": "All products"
   },

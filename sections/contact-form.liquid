@@ -1,8 +1,8 @@
 <section class="section section-padding">
   <div class="page-width" style="max-width: 640px;">
     <div class="text-center mb-lg reveal">
-      <h1 class="text-h1">{{ section.settings.heading | default: 'contact.heading' | t }}</h1>
-      <p class="text-body-lg text-secondary mt-md">{{ section.settings.text | default: 'contact.text' | t }}</p>
+      <h1 class="text-h1">{%- if section.settings.heading != blank -%}{{ section.settings.heading }}{%- else -%}{{ 'contact.heading' | t }}{%- endif -%}</h1>
+      <p class="text-body-lg text-secondary mt-md">{%- if section.settings.text != blank -%}{{ section.settings.text }}{%- else -%}{{ 'contact.text' | t }}{%- endif -%}</p>
     </div>
 
     {%- form 'contact', id: 'contact-form' -%}

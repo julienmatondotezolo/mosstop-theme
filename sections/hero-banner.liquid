@@ -1,8 +1,13 @@
 {{ 'section-hero.css' | asset_url | stylesheet_tag }}
 
 <section class="hero">
-  {%- if section.settings.image != blank -%}
-    <div class="hero__bg">
+  {%- comment -%} Video or image background {%- endcomment -%}
+  <div class="hero__bg">
+    {%- if section.settings.video_url != blank -%}
+      <video class="hero__video" autoplay muted loop playsinline>
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.image != blank -%}
       <img
         src="{{ section.settings.image | image_url: width: 1920 }}"
         alt="{{ section.settings.image.alt | default: section.settings.heading }}"
@@ -11,15 +16,10 @@
         loading="eager"
         fetchpriority="high"
       >
-      <div class="hero__overlay"></div>
-      <div class="hero__mesh"></div>
-    </div>
-  {%- else -%}
-    <div class="hero__bg">
-      <div class="hero__overlay" style="background: var(--gradient-hero);"></div>
-      <div class="hero__mesh"></div>
-    </div>
-  {%- endif -%}
+    {%- endif -%}
+    <div class="hero__overlay"></div>
+    <div class="hero__mesh"></div>
+  </div>
 
   {%- comment -%} Floating leaves {%- endcomment -%}
   <div class="hero__leaf hero__leaf--1" aria-hidden="true">
@@ -33,19 +33,65 @@
     </svg>
   </div>
 
-  <div class="page-width hero__content">
-    {%- if section.settings.badge != blank -%}
-      <span class="hero__badge">{{ section.settings.badge }}</span>
-    {%- endif -%}
-    <h1 class="hero__heading">{{ section.settings.heading }}</h1>
-    <p class="hero__text">{{ section.settings.text }}</p>
-    <div class="hero__actions">
-      {%- if section.settings.cta_url != blank -%}
-        <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
-      {%- endif -%}
-      {%- if section.settings.cta2_url != blank -%}
-        <a href="{{ section.settings.cta2_url }}" class="btn btn-secondary">{{ section.settings.cta2_text }}</a>
-      {%- endif -%}
+  <div class="page-width">
+    <div class="hero__split">
+      {%- comment -%} Left: bottle / product image {%- endcomment -%}
+      <div class="hero__bottle-col">
+        {%- if section.settings.product_image != blank -%}
+          <div class="hero__bottle-container">
+            <img
+              src="{{ section.settings.product_image | image_url: width: 600 }}"
+              alt="{{ section.settings.heading }}"
+              width="600"
+              height="600"
+              loading="eager"
+              class="hero__bottle-img"
+            >
+          </div>
+        {%- else -%}
+          <div class="hero__bottle-container hero__bottle-placeholder">
+            <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg" width="200" height="400">
+              <rect x="60" y="0" width="80" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+              <rect x="40" y="30" width="120" height="320" rx="16" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              <rect x="55" y="50" width="90" height="120" rx="8" fill="rgba(255,255,255,0.1)"/>
+              <text x="100" y="120" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="18" font-weight="700">MOSSTOP</text>
+              <rect x="40" y="350" width="120" height="50" rx="16" fill="rgba(255,255,255,0.1)"/>
+            </svg>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Right: text content {%- endcomment -%}
+      <div class="hero__content">
+        {%- if section.settings.badge != blank -%}
+          <span class="hero__badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+        <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+        <p class="hero__text">{{ section.settings.text }}</p>
+
+        {%- if section.settings.benefit_1 != blank -%}
+          <div class="hero__benefits">
+            {%- if section.settings.benefit_1 != blank -%}
+              <span class="hero__benefit-item">{{ section.settings.benefit_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.benefit_2 != blank -%}
+              <span class="hero__benefit-item">{{ section.settings.benefit_2 }}</span>
+            {%- endif -%}
+            {%- if section.settings.benefit_3 != blank -%}
+              <span class="hero__benefit-item">{{ section.settings.benefit_3 }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="hero__actions">
+          {%- if section.settings.cta_url != blank -%}
+            <a href="{{ section.settings.cta_url }}" class="neuro-button">{{ section.settings.cta_text }}</a>
+          {%- endif -%}
+          {%- if section.settings.cta2_url != blank -%}
+            <a href="{{ section.settings.cta2_url }}" class="btn btn-secondary">{{ section.settings.cta2_text }}</a>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -68,27 +114,56 @@
     },
     {
       "type": "text",
+      "id": "video_url",
+      "label": "Background video URL (MP4)",
+      "info": "Upload your video to Shopify Files and paste the URL here."
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product / bottle image (left side)"
+    },
+    {
+      "type": "text",
       "id": "badge",
       "label": "Badge text",
-      "default": "100% Natuurlijk"
+      "default": "Professionele Anti-Mos Spray"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "De kracht van mos voor jouw huid"
+      "default": "Restore Your Home's Beauty in Minutes"
     },
     {
       "type": "textarea",
       "id": "text",
       "label": "Text",
-      "default": "Ontdek onze natuurlijke mosverzorging, met zorg samengesteld voor een stralende huid."
+      "default": "Snelwerkende Anti-Mos Spray voor Terrassen, Gevels & Daken"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "Zichtbaar resultaat in 24 uur"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "12 maanden bescherming"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Veilig & milieuvriendelijk"
     },
     {
       "type": "text",
       "id": "cta_text",
       "label": "Primary button text",
-      "default": "Ontdek nu"
+      "default": "Bestel nu"
     },
     {
       "type": "url",

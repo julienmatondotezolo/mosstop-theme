@@ -1,0 +1,198 @@
+{{ 'section-before-after.css' | asset_url | stylesheet_tag }}
+
+<section class="section section-padding before-after-section" id="before-after">
+  <div class="page-width text-center">
+    <span class="text-overline" style="display: block; margin-bottom: var(--space-sm); color: var(--green-500);">{{ section.settings.overline | default: 'Het bewijs' }}</span>
+    <h2 class="text-h2 mb-lg reveal">{{ section.settings.heading | default: 'Zie het verschil' }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="text-body-lg reveal" style="color: var(--neutral-500); max-width: 600px; margin: 0 auto var(--space-2xl);">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="page-width">
+    <div class="before-after-slider reveal" id="scrollySlider">
+      <div class="before-after__container">
+        {%- if section.settings.before_image != blank -%}
+          <img
+            src="{{ section.settings.before_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.before_label | default: 'Voor' }}"
+            class="before-after__before-img"
+            loading="lazy"
+            width="1200"
+            height="675"
+          >
+        {%- else -%}
+          <div class="before-after__placeholder before-after__placeholder--before">
+            <span>{{ section.settings.before_label | default: 'VOOR' }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="before-after__after-wrap" id="afterWrap">
+          {%- if section.settings.after_image != blank -%}
+            <img
+              src="{{ section.settings.after_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.after_label | default: 'Na' }}"
+              class="before-after__after-img"
+              loading="lazy"
+              width="1200"
+              height="675"
+            >
+          {%- else -%}
+            <div class="before-after__placeholder before-after__placeholder--after">
+              <span>{{ section.settings.after_label | default: 'NA' }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="before-after__handle" id="sliderHandle">
+          <div class="before-after__handle-line"></div>
+          <div class="before-after__handle-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <div class="glass-label before-after__label--before">{{ section.settings.before_label | default: 'VOOR' }}</div>
+        <div class="glass-label before-after__label--after">{{ section.settings.after_label | default: '24 UUR LATER' }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  function initBeforeAfter() {
+    var slider = document.getElementById('scrollySlider');
+    var afterWrap = document.getElementById('afterWrap');
+    var handle = document.getElementById('sliderHandle');
+    if (!slider || !afterWrap || !handle) return;
+
+    var isDragging = false;
+    var hasScrollRevealed = false;
+
+    function setPosition(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      afterWrap.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+      handle.style.left = pct + '%';
+    }
+
+    /* Start at 0% (before image fully visible) */
+    setPosition(0);
+
+    /* Scroll-triggered auto-reveal */
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !hasScrollRevealed) {
+            hasScrollRevealed = true;
+            var start = null;
+            var duration = 1500;
+            function animate(ts) {
+              if (!start) start = ts;
+              var progress = Math.min((ts - start) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              setPosition(eased * 50);
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      observer.observe(slider);
+    }
+
+    /* Drag interaction */
+    function getPercent(e) {
+      var rect = slider.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    function onStart(e) {
+      e.preventDefault();
+      isDragging = true;
+      setPosition(getPercent(e));
+    }
+
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      setPosition(getPercent(e));
+    }
+
+    function onEnd() {
+      isDragging = false;
+    }
+
+    slider.addEventListener('mousedown', onStart);
+    slider.addEventListener('touchstart', onStart, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBeforeAfter);
+  } else {
+    initBeforeAfter();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Before / After Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Het bewijs"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Zie het verschil"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "VOOR"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "24 UUR LATER"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After Slider"
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,9 @@
 /* === Header — Premium === */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: var(--white);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -9,7 +11,8 @@
     background-color var(--duration-standard) var(--easing),
     backdrop-filter var(--duration-standard) var(--easing),
     box-shadow var(--duration-standard) var(--easing),
-    border-color var(--duration-standard) var(--easing);
+    border-color var(--duration-standard) var(--easing),
+    transform var(--duration-standard) var(--easing);
 }
 
 /* Transparent header on homepage (before scroll) */
@@ -20,17 +23,34 @@
 
 .header--transparent .header__nav-link,
 .header--transparent .header__cart-link,
-.header--transparent .header__menu-toggle {
+.header--transparent .header__menu-toggle,
+.header--transparent .lang-switcher a,
+.header--transparent .lang-switcher__link,
+.header--transparent .lang-switcher .separator {
   color: var(--white);
+}
+
+.header--transparent .header__nav-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.header--transparent .header__nav-link::after {
+  background: var(--white);
 }
 
 .header--transparent .header__logo span {
   color: var(--white) !important;
 }
 
+/* Hidden state (hide on scroll down) */
+.header--hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
 /* Scrolled state (applied by JS) */
 .header--scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-sm);
@@ -39,8 +59,18 @@
 
 .header--scrolled .header__nav-link,
 .header--scrolled .header__cart-link,
-.header--scrolled .header__menu-toggle {
+.header--scrolled .header__menu-toggle,
+.header--scrolled .lang-switcher a,
+.header--scrolled .lang-switcher__link {
   color: var(--neutral-700);
+}
+
+.header--scrolled .header__nav-link:hover {
+  color: var(--green-700);
+}
+
+.header--scrolled .header__nav-link::after {
+  background: var(--green-500);
 }
 
 .header--scrolled .header__logo span {

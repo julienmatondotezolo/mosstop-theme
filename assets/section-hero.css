@@ -1,4 +1,4 @@
-/* === Hero Banner — Premium === */
+/* === Hero Banner — Premium Split-Screen === */
 .hero {
   position: relative;
   overflow: hidden;
@@ -20,10 +20,21 @@
   object-fit: cover;
 }
 
+/* Video background */
+.hero__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(30, 58, 43, 0.90), rgba(45, 74, 58, 0.75));
+  background: linear-gradient(135deg, rgba(1, 50, 32, 0.85), rgba(45, 87, 69, 0.70));
 }
 
 /* Animated gradient mesh */
@@ -33,7 +44,7 @@
   opacity: 0.15;
   background:
     radial-gradient(ellipse at 20% 50%, rgba(143, 166, 142, 0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(201, 168, 118, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 107, 53, 0.2) 0%, transparent 50%),
     radial-gradient(ellipse at 60% 80%, rgba(61, 107, 82, 0.5) 0%, transparent 50%);
   animation: meshShift 12s ease-in-out infinite alternate;
 }
@@ -44,10 +55,46 @@
   100% { transform: scale(1.05) translate(2%, -2%); }
 }
 
+/* Split layout */
+.hero__split {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+/* Bottle / product column */
+.hero__bottle-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__bottle-container {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: heroFadeUp 0.8s var(--easing) 0.3s forwards;
+}
+
+.hero__bottle-img {
+  max-height: 500px;
+  width: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+.hero__bottle-placeholder svg {
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+}
+
+/* Content column */
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 680px;
   color: var(--white);
 }
 
@@ -68,9 +115,10 @@
 }
 
 .hero__heading {
-  font-size: var(--text-display);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: var(--weight-extrabold);
-  line-height: 1.05;
+  line-height: 0.95;
   margin-bottom: var(--space-lg);
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
   opacity: 0;
@@ -80,9 +128,40 @@
 .hero__text {
   font-size: var(--text-body-lg);
   opacity: 0;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   line-height: 1.7;
   animation: heroFadeUp 0.8s var(--easing) 0.6s forwards;
+}
+
+/* Benefits list */
+.hero__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  animation: heroFadeUp 0.8s var(--easing) 0.7s forwards;
+}
+
+.hero__benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+}
+
+.hero__benefit-item::before {
+  content: '\2713';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  flex-shrink: 0;
 }
 
 .hero__actions {
@@ -108,15 +187,10 @@
     transform: translateY(20px);
   }
   to {
-    opacity: 0.9;
+    opacity: 1;
     transform: translateY(0);
   }
 }
-
-/* Override: hero__text max opacity */
-.hero__heading { animation-fill-mode: forwards; }
-.hero__badge,
-.hero__actions { animation-fill-mode: forwards; }
 
 /* Floating leaf decoration */
 .hero__leaf {
@@ -170,43 +244,28 @@
     min-height: 85vh;
     padding-block: var(--space-3xl);
   }
+  .hero__split {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+  .hero__bottle-container {
+    height: 300px;
+  }
+  .hero__bottle-img {
+    max-height: 300px;
+  }
   .hero__heading {
-    font-size: 40px;
+    font-size: clamp(2rem, 8vw, 3rem);
   }
   .hero__text {
     font-size: var(--text-body);
   }
-  .hero__leaf { display: none; }
-}
-
-/* === Product Hero (split layout) === */
-.product-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
-  align-items: center;
-}
-
-.product-hero__image img {
-  border-radius: var(--radius-lg);
-  width: 100%;
-}
-
-.product-hero__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.product-hero__price {
-  font-size: var(--text-h2);
-  font-weight: var(--weight-bold);
-  color: var(--green-700);
-}
-
-@media (max-width: 768px) {
-  .product-hero {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+  .hero__benefits {
+    align-items: center;
   }
+  .hero__actions {
+    justify-content: center;
+  }
+  .hero__leaf { display: none; }
 }

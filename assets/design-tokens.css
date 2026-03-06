@@ -28,6 +28,13 @@
 
   /* ---- Colors: Accent ---- */
   --accent-warm: #C9A876;  /* Warm gold — luxury touch */
+  --accent-orange: #FF6B35; /* Conversion orange — CTAs */
+
+  /* ---- Colors: Forest (moss removal brand) ---- */
+  --forest-deep:  #013220;
+  --forest-light: #2D5745;
+  --glass-white:  rgba(255, 255, 255, 0.15);
+  --shadow-dark:  rgba(1, 50, 32, 0.3);
 
   /* ---- Gradients ---- */
   --gradient-hero:    linear-gradient(135deg, #2D4A3A 0%, #1E3A2B 100%);

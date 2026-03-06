@@ -1,0 +1,157 @@
+{%- comment -%}
+  Sticky Buy Bar — appears after scrolling 15% of the page.
+  Uses Shopify AJAX Cart API for add-to-cart.
+  Include this in theme.liquid before </body>.
+{%- endcomment -%}
+
+{{ 'section-sticky-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="sticky-buy-bar" id="stickyBar" aria-label="Snel bestellen">
+  <div class="sticky-buy-bar__content page-width">
+    <div class="sticky-buy-bar__product">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 40 }}" alt="{{ shop.name }}" class="sticky-buy-bar__icon" width="40" height="40">
+      {%- endif -%}
+      <span class="sticky-buy-bar__name">{{ section.settings.product_name | default: 'Mosstop Anti-Mos Spray' }}</span>
+    </div>
+
+    <div class="sticky-buy-bar__bundles" id="bundleSelector">
+      <button class="sticky-buy-bar__bundle" data-bottles="1" data-price="24.95" type="button">
+        <span class="sticky-buy-bar__bundle-qty">1 Fles</span>
+        <span class="sticky-buy-bar__bundle-price">&euro;24,95</span>
+        <span class="sticky-buy-bar__bundle-coverage">50m&sup2;</span>
+      </button>
+
+      <button class="sticky-buy-bar__bundle sticky-buy-bar__bundle--popular selected" data-bottles="3" data-price="64.95" type="button">
+        <span class="sticky-buy-bar__bundle-badge">POPULAIR</span>
+        <span class="sticky-buy-bar__bundle-qty">3 Flessen</span>
+        <span class="sticky-buy-bar__bundle-price">&euro;64,95</span>
+        <span class="sticky-buy-bar__bundle-savings">Bespaar &euro;10</span>
+        <span class="sticky-buy-bar__bundle-coverage">150m&sup2;</span>
+      </button>
+
+      <button class="sticky-buy-bar__bundle sticky-buy-bar__bundle--best" data-bottles="6" data-price="119.95" type="button">
+        <span class="sticky-buy-bar__bundle-badge">BESTE WAARDE</span>
+        <span class="sticky-buy-bar__bundle-qty">6 Flessen</span>
+        <span class="sticky-buy-bar__bundle-price">&euro;119,95</span>
+        <span class="sticky-buy-bar__bundle-savings">Bespaar &euro;30</span>
+        <span class="sticky-buy-bar__bundle-coverage">300m&sup2;</span>
+      </button>
+    </div>
+
+    <div class="sticky-buy-bar__actions">
+      <button class="neuro-button sticky-buy-bar__add" id="stickyAddToCart" type="button">
+        In Winkelwagen
+      </button>
+    </div>
+  </div>
+
+  <div class="sticky-buy-bar__urgency" id="stickyUrgency">
+    <span>Nog {{ section.settings.stock_count | default: 12 }} flessen op voorraad</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  var bar = document.getElementById('stickyBar');
+  if (!bar) return;
+
+  var isVisible = false;
+  var selectedBottles = 3;
+
+  /* Show/hide on scroll */
+  function checkScroll() {
+    var scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    if (scrollPercent > 0.15 && !isVisible) {
+      showBar();
+    } else if (scrollPercent <= 0.05 && isVisible) {
+      hideBar();
+    }
+  }
+
+  function showBar() {
+    isVisible = true;
+    bar.classList.add('is-visible');
+  }
+
+  function hideBar() {
+    isVisible = false;
+    bar.classList.remove('is-visible');
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+
+  /* Auto-show after 15 seconds */
+  setTimeout(function() {
+    if (!isVisible) showBar();
+  }, 15000);
+
+  /* Bundle selection */
+  var bundles = document.querySelectorAll('.sticky-buy-bar__bundle');
+  bundles.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      bundles.forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      selectedBottles = parseInt(btn.dataset.bottles, 10);
+      updateUrgency();
+    });
+  });
+
+  function updateUrgency() {
+    var el = document.querySelector('#stickyUrgency span');
+    if (!el) return;
+    var msgs = {
+      1: 'Nog 24 flessen op voorraad',
+      3: 'Nog 8 bundels beschikbaar',
+      6: 'Laatste 3 pro-pakketten!'
+    };
+    el.textContent = msgs[selectedBottles] || msgs[1];
+  }
+
+  /* Add to cart via Shopify AJAX */
+  var addBtn = document.getElementById('stickyAddToCart');
+  if (addBtn) {
+    addBtn.addEventListener('click', function() {
+      var variantId = bar.dataset.variantId;
+      if (!variantId) {
+        /* Fallback: redirect to product page */
+        window.location.href = '/collections/all';
+        return;
+      }
+      addBtn.disabled = true;
+      addBtn.textContent = '...';
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: parseInt(variantId, 10),
+          quantity: selectedBottles
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        addBtn.textContent = '\u2713 Toegevoegd!';
+        addBtn.style.background = '#22c55e';
+        /* Update cart count if available */
+        if (typeof updateCartCount === 'function') updateCartCount();
+        var badges = document.querySelectorAll('[data-cart-count]');
+        fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+          badges.forEach(function(el) {
+            el.textContent = cart.item_count;
+            el.hidden = cart.item_count === 0;
+          });
+        });
+        setTimeout(function() {
+          addBtn.textContent = 'In Winkelwagen';
+          addBtn.style.background = '';
+          addBtn.disabled = false;
+        }, 2000);
+      })
+      .catch(function() {
+        addBtn.textContent = 'In Winkelwagen';
+        addBtn.disabled = false;
+      });
+    });
+  }
+})();
+</script>

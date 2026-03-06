@@ -46,25 +46,60 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* --- Header: Transparent → Solid on Scroll --- */
+  /* --- Header: Fixed + Transparent on homepage → Solid on Scroll + Hide on Scroll Down --- */
   function initHeaderScroll() {
     var header = document.querySelector('[data-header]');
     if (!header) return;
-    var isTransparent = header.classList.contains('header--transparent');
+    var isHomepage = header.classList.contains('header--transparent');
     var scrolled = false;
+    var lastScrollY = window.scrollY;
+
+    /* Calculate trust bar height to offset the header */
+    var trustBar = document.querySelector('.trust-bar');
+    var trustBarHeight = trustBar ? trustBar.offsetHeight : 0;
+
+    /* Set initial top offset below trust bar */
+    header.style.top = trustBarHeight + 'px';
+
+    /* Add padding to main content to account for fixed header */
+    var main = document.getElementById('main-content');
+    if (main && !isHomepage) {
+      main.style.paddingTop = (80 + trustBarHeight) + 'px';
+    }
 
     function onScroll() {
-      var shouldScroll = window.scrollY > 60;
+      var currentScrollY = window.scrollY;
+
+      /* Adjust header top: slide up as trust bar scrolls away */
+      var offset = Math.max(0, trustBarHeight - currentScrollY);
+      header.style.top = offset + 'px';
+
+      var shouldScroll = currentScrollY > trustBarHeight;
+
+      /* Transparent → solid */
       if (shouldScroll !== scrolled) {
         scrolled = shouldScroll;
         if (scrolled) {
           header.classList.add('header--scrolled');
-          if (isTransparent) header.classList.remove('header--transparent');
+          if (isHomepage) header.classList.remove('header--transparent');
         } else {
           header.classList.remove('header--scrolled');
-          if (isTransparent) header.classList.add('header--transparent');
+          if (isHomepage) header.classList.add('header--transparent');
         }
       }
+
+      /* Hide on scroll down, show on scroll up (only after scrolling past trust bar + header) */
+      if (currentScrollY > trustBarHeight + 100) {
+        if (currentScrollY > lastScrollY) {
+          header.classList.add('header--hidden');
+        } else {
+          header.classList.remove('header--hidden');
+        }
+      } else {
+        header.classList.remove('header--hidden');
+      }
+
+      lastScrollY = currentScrollY;
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });

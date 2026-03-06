@@ -28,7 +28,7 @@
 
   {{ content_for_header }}
 </head>
-<body>
+<body class="template-{{ template.name | default: 'other' }}">
   <div class="scroll-progress" aria-hidden="true"></div>
   <a href="#main-content" class="skip-to-content">{{ 'general.skip_to_content' | t }}</a>
 
@@ -40,6 +40,8 @@
   </main>
 
   {% section 'footer' %}
+
+  {% render 'sticky-buy-bar' %}
 
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </body>

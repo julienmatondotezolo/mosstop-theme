@@ -1,0 +1,127 @@
+/* === Before/After Slider === */
+.before-after-section {
+  background: var(--gradient-light);
+}
+
+.before-after-slider {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.before-after__container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.before-after__before-img,
+.before-after__placeholder--before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.before-after__after-wrap {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 100% 0 0);
+  z-index: 1;
+}
+
+.before-after__after-img,
+.before-after__placeholder--after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholders when no images are set */
+.before-after__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--white);
+}
+
+.before-after__placeholder--before {
+  background: linear-gradient(135deg, #4a3728 0%, #6b5040 100%);
+}
+
+.before-after__placeholder--after {
+  background: linear-gradient(135deg, var(--forest-deep) 0%, var(--forest-light) 100%);
+}
+
+/* Handle */
+.before-after__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  z-index: 3;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.before-after__handle-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: var(--white);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.before-after__handle-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  color: var(--forest-deep);
+  pointer-events: auto;
+}
+
+/* Labels */
+.before-after__label--before {
+  left: 20px;
+}
+
+.before-after__label--after {
+  right: 20px;
+  left: auto;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .before-after__container {
+    aspect-ratio: 4 / 3;
+  }
+  .before-after__handle-circle {
+    width: 40px;
+    height: 40px;
+  }
+}
