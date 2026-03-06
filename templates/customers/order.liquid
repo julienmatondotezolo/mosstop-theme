@@ -1,0 +1,32 @@
+{% layout 'theme' %}
+
+<section class="section section-padding">
+  <div class="page-width" style="max-width: 800px;">
+    <h1 class="text-h1 text-center mb-lg">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="text-center text-muted mb-lg">{{ order.created_at | date: "%B %d, %Y" }}</p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: var(--space-xl);">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--neutral-200); text-align: left;">
+          <th style="padding: var(--space-sm);">{{ 'customer.order.product' | t }}</th>
+          <th style="padding: var(--space-sm);">{{ 'customer.order.quantity' | t }}</th>
+          <th style="padding: var(--space-sm);">{{ 'customer.order.total' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for line_item in order.line_items -%}
+          <tr style="border-bottom: 1px solid var(--neutral-200);">
+            <td style="padding: var(--space-sm);">{{ line_item.title }}</td>
+            <td style="padding: var(--space-sm);">{{ line_item.quantity }}</td>
+            <td style="padding: var(--space-sm);">{{ line_item.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <div style="text-align: right;">
+      <p><strong>{{ 'customer.order.subtotal' | t }}:</strong> {{ order.subtotal_price | money }}</p>
+      <p class="text-h3" style="color: var(--green-700);"><strong>{{ 'customer.order.total' | t }}:</strong> {{ order.total_price | money }}</p>
+    </div>
+  </div>
+</section>

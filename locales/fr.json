@@ -1,0 +1,178 @@
+{
+  "general": {
+    "skip_to_content": "Aller au contenu",
+    "menu": "Menu",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "share": "Partager",
+    "loading": "Chargement...",
+    "404_title": "Page introuvable",
+    "404_text": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "404_button": "Retour à l'accueil"
+  },
+  "header": {
+    "shop": "Boutique",
+    "about": "À propos",
+    "contact": "Contact",
+    "cart": "Panier"
+  },
+  "footer": {
+    "quick_links": "Liens rapides",
+    "customer_service": "Service client",
+    "follow_us": "Suivez-nous",
+    "privacy_policy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "shipping_info": "Info livraison",
+    "returns": "Retours",
+    "newsletter_title": "Restez informé",
+    "newsletter_placeholder": "Votre adresse e-mail",
+    "newsletter_button": "S'inscrire",
+    "copyright": "© {{ year }} Mosstop. Tous droits réservés."
+  },
+  "hero": {
+    "badge": "100% Naturel",
+    "heading": "La puissance de la mousse pour votre peau",
+    "subheading": "Découvrez nos soins naturels à base de mousse, composés avec soin pour une peau éclatante.",
+    "cta_primary": "Découvrir",
+    "cta_secondary": "En savoir plus"
+  },
+  "benefits": {
+    "heading": "Pourquoi Mosstop ?",
+    "benefit_1_title": "100% Naturel",
+    "benefit_1_text": "Uniquement les ingrédients les plus purs de la nature.",
+    "benefit_2_title": "Testé dermatologiquement",
+    "benefit_2_text": "Sûr et adapté à tous les types de peau.",
+    "benefit_3_title": "Livraison rapide",
+    "benefit_3_text": "Livraison gratuite à partir de 50€ en Belgique.",
+    "benefit_4_title": "Emballage durable",
+    "benefit_4_text": "Matériaux recyclables, déchets minimaux."
+  },
+  "how_it_works": {
+    "heading": "Comment ça marche ?",
+    "step_1_title": "Choisissez votre produit",
+    "step_1_text": "Parcourez notre gamme et trouvez le soin parfait.",
+    "step_2_title": "Commandez en ligne",
+    "step_2_text": "Paiement sécurisé et livraison rapide à domicile.",
+    "step_3_title": "Profitez des résultats",
+    "step_3_text": "Découvrez la puissance de la mousse sur votre peau."
+  },
+  "testimonials": {
+    "heading": "Ce que disent nos clients"
+  },
+  "faq": {
+    "heading": "Questions fréquentes"
+  },
+  "cta_banner": {
+    "heading": "Prêt à découvrir ?",
+    "text": "Essayez Mosstop aujourd'hui et sentez la différence.",
+    "button": "Acheter maintenant"
+  },
+  "product": {
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Épuisé",
+    "unavailable": "Indisponible",
+    "quantity": "Quantité",
+    "description": "Description",
+    "price": "Prix",
+    "compare_at_price": "Prix original",
+    "vendor": "Marque",
+    "sku": "SKU",
+    "share": "Partager ce produit",
+    "view": "Voir"
+  },
+  "collection": {
+    "heading": "Collection",
+    "products_count": "{{ count }} produits",
+    "no_products": "Aucun produit trouvé.",
+    "all": "Tous les produits"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Votre panier est vide.",
+    "continue_shopping": "Continuer les achats",
+    "subtotal": "Sous-total",
+    "checkout": "Passer à la caisse",
+    "remove": "Supprimer",
+    "note_label": "Note de commande",
+    "note_placeholder": "Instructions spéciales pour votre commande...",
+    "shipping_note": "Les frais de livraison sont calculés à la caisse.",
+    "update": "Mettre à jour"
+  },
+  "contact": {
+    "heading": "Contactez-nous",
+    "text": "Vous avez une question ? Remplissez le formulaire et nous vous contacterons dès que possible.",
+    "name": "Nom",
+    "email": "Adresse e-mail",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Merci ! Nous vous contacterons bientôt."
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu",
+    "close_menu": "Fermer le menu",
+    "open_menu": "Ouvrir le menu",
+    "increase_quantity": "Augmenter la quantité",
+    "decrease_quantity": "Diminuer la quantité",
+    "remove_item": "Supprimer l'article"
+  },
+  "announcement": {
+    "text": "Livraison gratuite à partir de 50€ 🌿"
+  },
+  "newsletter": {
+    "label": "Adresse e-mail",
+    "success": "Merci pour votre inscription !"
+  },
+  "language": {
+    "label": "Langue"
+  },
+  "rich_text": {
+    "heading": "À propos"
+  },
+  "image_with_text": {
+    "heading": "Notre mission"
+  },
+  "customer": {
+    "account": {
+      "title": "Mon compte"
+    },
+    "log_out": "Se déconnecter",
+    "login": {
+      "title": "Connexion",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "sign_in": "Se connecter",
+      "create_account": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "S'inscrire"
+    },
+    "orders": {
+      "title": "Commandes",
+      "order_number": "Commande",
+      "date": "Date",
+      "total": "Total",
+      "none": "Vous n'avez pas encore passé de commande."
+    },
+    "order": {
+      "title": "Commande {{ name }}",
+      "product": "Produit",
+      "quantity": "Quantité",
+      "subtotal": "Sous-total",
+      "total": "Total"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Carte cadeau",
+      "subtext": "Voici votre carte cadeau !",
+      "expired": "Expirée",
+      "shop_link": "Aller à la boutique",
+      "add_to_apple_wallet": "Ajouter à Apple Wallet"
+    }
+  }
+}

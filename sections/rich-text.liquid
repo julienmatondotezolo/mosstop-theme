@@ -1,0 +1,63 @@
+<section class="section section-padding{% if section.settings.background == 'green' %} bg-green-50{% elsif section.settings.background == 'gray' %} bg-neutral-100{% endif %}">
+  <div class="page-width" style="max-width: 800px;">
+    <div class="text-center reveal">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="text-h2 mb-md">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      <div class="text-body text-secondary" style="line-height: 1.7;">
+        {{ section.settings.text }}
+      </div>
+      {%- if section.settings.button_url != blank -%}
+        <div class="mt-lg">
+          <a href="{{ section.settings.button_url }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Over ons"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Content",
+      "default": "<p>Vertel je verhaal hier.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "green", "label": "Light green" },
+        { "value": "gray", "label": "Light gray" }
+      ],
+      "default": "white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text"
+    }
+  ]
+}
+{% endschema %}

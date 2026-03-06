@@ -1,0 +1,10 @@
+{
+  "current": {
+    "color_primary": "#388E3C",
+    "color_primary_dark": "#1B5E20",
+    "color_text": "#1A1A1A",
+    "color_background": "#FFFFFF",
+    "logo_width": 140,
+    "cart_show_vendor": false
+  }
+}

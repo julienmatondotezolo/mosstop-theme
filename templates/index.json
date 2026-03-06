@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "badge": "100% Natuurlijk",
+        "heading": "De kracht van mos voor jouw huid",
+        "text": "Ontdek onze natuurlijke mosverzorging, met zorg samengesteld voor een stralende huid.",
+        "cta_text": "Ontdek nu",
+        "cta_url": "/collections/all",
+        "cta2_text": "Meer info",
+        "cta2_url": "/pages/about"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {
+        "heading": "Waarom Mosstop?"
+      },
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "leaf", "title": "100% Natuurlijk", "text": "Alleen de zuiverste ingrediënten uit de natuur." } },
+        "b2": { "type": "benefit", "settings": { "icon": "shield", "title": "Dermatologisch getest", "text": "Veilig en geschikt voor elke huidtype." } },
+        "b3": { "type": "benefit", "settings": { "icon": "truck", "title": "Snelle levering", "text": "Gratis verzending vanaf €50 in België." } },
+        "b4": { "type": "benefit", "settings": { "icon": "clock", "title": "Duurzaam verpakt", "text": "Recyclebare materialen, minimale afval." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {
+        "heading": "Hoe werkt het?"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Kies je product", "text": "Bekijk ons assortiment en vind de perfecte verzorging." } },
+        "s2": { "type": "step", "settings": { "title": "Bestel online", "text": "Veilig betalen en snel geleverd aan huis." } },
+        "s3": { "type": "step", "settings": { "title": "Geniet van resultaat", "text": "Ervaar de kracht van mos op je huid." } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Wat klanten zeggen"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Geweldig product! Mijn huid voelt zoveel beter.", "author": "Sophie V.", "rating": 5 } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Natuurlijke ingrediënten en snelle levering. Top!", "author": "Thomas D.", "rating": 5 } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Eindelijk een product dat doet wat het belooft.", "author": "Lisa M.", "rating": 4 } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Veelgestelde vragen"
+      },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Wat maakt Mosstop uniek?", "answer": "<p>Mosstop gebruikt 100% natuurlijke mosingrediënten, zorgvuldig geselecteerd voor hun heilzame eigenschappen voor de huid.<\/p>" } },
+        "q2": { "type": "question", "settings": { "question": "Is het geschikt voor gevoelige huid?", "answer": "<p>Ja! Al onze producten zijn dermatologisch getest en geschikt voor alle huidtypes, inclusief de gevoelige huid.<\/p>" } },
+        "q3": { "type": "question", "settings": { "question": "Hoe snel wordt mijn bestelling geleverd?", "answer": "<p>Bestellingen worden binnen 1-2 werkdagen verzonden. Gratis verzending vanaf €50 in België.<\/p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "heading": "Klaar om te ontdekken?",
+        "text": "Probeer Mosstop vandaag nog en voel het verschil.",
+        "button_text": "Shop nu",
+        "button_url": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "benefits", "how-it-works", "testimonials", "faq", "cta"]
+}

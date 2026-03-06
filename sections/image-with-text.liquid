@@ -1,0 +1,112 @@
+<section class="section section-padding{% if section.settings.background == 'green' %} bg-green-50{% elsif section.settings.background == 'gray' %} bg-neutral-100{% endif %}">
+  <div class="page-width">
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    " class="{% if section.settings.image_position == 'right' %}image-text--reversed{% endif %}">
+
+      <div class="reveal"{% if section.settings.image_position == 'right' %} style="order: 2;"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 700 }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+            width="700"
+            height="500"
+            loading="lazy"
+            style="border-radius: var(--radius-lg); width: 100%;"
+          >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="reveal"{% if section.settings.image_position == 'right' %} style="order: 1;"{% endif %}>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="text-h2 mb-md">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        <div class="text-body text-secondary" style="line-height: 1.7;">
+          {{ section.settings.text }}
+        </div>
+        {%- if section.settings.button_url != blank -%}
+          <div class="mt-lg">
+            <a href="{{ section.settings.button_url }}" class="btn btn-primary">{{ section.settings.button_text }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .image-text--reversed > div { order: unset !important; }
+    .image-text--reversed { grid-template-columns: 1fr !important; }
+    .section .page-width > div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Onze missie"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Content",
+      "default": "<p>Vertel meer over je merk of missie.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "green", "label": "Light green" },
+        { "value": "gray", "label": "Light gray" }
+      ],
+      "default": "white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text"
+    }
+  ]
+}
+{% endschema %}

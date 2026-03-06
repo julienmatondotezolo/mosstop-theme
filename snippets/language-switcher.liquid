@@ -1,0 +1,18 @@
+{%- if localization.available_languages.size > 1 -%}
+  <div class="lang-switcher">
+    {%- form 'localization', id: 'language-form', class: 'lang-switcher__form' -%}
+      {%- for language in localization.available_languages -%}
+        <button
+          type="submit"
+          name="locale_code"
+          value="{{ language.iso_code }}"
+          class="lang-switcher__link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
+          aria-label="{{ language.endonym_name }}"
+          {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+        >
+          {{- language.iso_code | upcase -}}
+        </button>
+      {%- endfor -%}
+    {%- endform -%}
+  </div>
+{%- endif -%}

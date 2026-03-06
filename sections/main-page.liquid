@@ -1,0 +1,16 @@
+<section class="section section-padding">
+  <div class="page-width" style="max-width: 800px;">
+    <h1 class="text-h1 text-center mb-lg">{{ page.title }}</h1>
+    <div class="text-body text-secondary" style="line-height: 1.7;">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page content",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

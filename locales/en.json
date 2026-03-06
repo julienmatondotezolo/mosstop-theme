@@ -1,0 +1,178 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "menu": "Menu",
+    "close": "Close",
+    "search": "Search",
+    "share": "Share",
+    "loading": "Loading...",
+    "404_title": "Page not found",
+    "404_text": "The page you're looking for doesn't exist or has been moved.",
+    "404_button": "Back to homepage"
+  },
+  "header": {
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart"
+  },
+  "footer": {
+    "quick_links": "Quick links",
+    "customer_service": "Customer service",
+    "follow_us": "Follow us",
+    "privacy_policy": "Privacy policy",
+    "terms": "Terms & conditions",
+    "shipping_info": "Shipping info",
+    "returns": "Returns",
+    "newsletter_title": "Stay up to date",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_button": "Subscribe",
+    "copyright": "© {{ year }} Mosstop. All rights reserved."
+  },
+  "hero": {
+    "badge": "100% Natural",
+    "heading": "The power of moss for your skin",
+    "subheading": "Discover our natural moss skincare, carefully crafted for radiant skin.",
+    "cta_primary": "Discover now",
+    "cta_secondary": "Learn more"
+  },
+  "benefits": {
+    "heading": "Why Mosstop?",
+    "benefit_1_title": "100% Natural",
+    "benefit_1_text": "Only the purest ingredients from nature.",
+    "benefit_2_title": "Dermatologically tested",
+    "benefit_2_text": "Safe and suitable for every skin type.",
+    "benefit_3_title": "Fast delivery",
+    "benefit_3_text": "Free shipping from €50 in Belgium.",
+    "benefit_4_title": "Sustainably packaged",
+    "benefit_4_text": "Recyclable materials, minimal waste."
+  },
+  "how_it_works": {
+    "heading": "How does it work?",
+    "step_1_title": "Choose your product",
+    "step_1_text": "Browse our range and find the perfect care.",
+    "step_2_title": "Order online",
+    "step_2_text": "Secure payment and fast home delivery.",
+    "step_3_title": "Enjoy the results",
+    "step_3_text": "Experience the power of moss on your skin."
+  },
+  "testimonials": {
+    "heading": "What customers say"
+  },
+  "faq": {
+    "heading": "Frequently asked questions"
+  },
+  "cta_banner": {
+    "heading": "Ready to discover?",
+    "text": "Try Mosstop today and feel the difference.",
+    "button": "Shop now"
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "quantity": "Quantity",
+    "description": "Description",
+    "price": "Price",
+    "compare_at_price": "Compare at price",
+    "vendor": "Vendor",
+    "sku": "SKU",
+    "share": "Share this product",
+    "view": "View"
+  },
+  "collection": {
+    "heading": "Collection",
+    "products_count": "{{ count }} products",
+    "no_products": "No products found.",
+    "all": "All products"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue_shopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "note_label": "Order note",
+    "note_placeholder": "Special instructions for your order...",
+    "shipping_note": "Shipping costs are calculated at checkout.",
+    "update": "Update"
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "text": "Have a question? Fill in the form and we'll get back to you as soon as possible.",
+    "name": "Name",
+    "email": "Email address",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thank you! We'll get back to you soon."
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "increase_quantity": "Increase quantity",
+    "decrease_quantity": "Decrease quantity",
+    "remove_item": "Remove item"
+  },
+  "announcement": {
+    "text": "Free shipping from €50 🌿"
+  },
+  "newsletter": {
+    "label": "Email address",
+    "success": "Thanks for subscribing!"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "rich_text": {
+    "heading": "About us"
+  },
+  "image_with_text": {
+    "heading": "Our mission"
+  },
+  "customer": {
+    "account": {
+      "title": "My account"
+    },
+    "log_out": "Log out",
+    "login": {
+      "title": "Log in",
+      "email": "Email address",
+      "password": "Password",
+      "sign_in": "Sign in",
+      "create_account": "Create account"
+    },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Register"
+    },
+    "orders": {
+      "title": "Orders",
+      "order_number": "Order",
+      "date": "Date",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "product": "Product",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "total": "Total"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Gift card",
+      "subtext": "Here's your gift card!",
+      "expired": "Expired",
+      "shop_link": "Go to store",
+      "add_to_apple_wallet": "Add to Apple Wallet"
+    }
+  }
+}

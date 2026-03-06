@@ -1,0 +1,35 @@
+{% layout 'theme' %}
+
+<section class="section section-padding">
+  <div class="page-width">
+    <h1 class="text-h1 text-center mb-lg">{{ 'customer.account.title' | t }}</h1>
+    <p class="text-center mb-lg">{{ customer.email }}</p>
+    <div class="text-center">
+      <a href="/account/logout" class="btn btn-secondary">{{ 'customer.log_out' | t }}</a>
+    </div>
+
+    <h2 class="text-h3 mt-lg mb-md">{{ 'customer.orders.title' | t }}</h2>
+    {%- if customer.orders.size > 0 -%}
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--neutral-200); text-align: left;">
+            <th style="padding: var(--space-sm);">{{ 'customer.orders.order_number' | t }}</th>
+            <th style="padding: var(--space-sm);">{{ 'customer.orders.date' | t }}</th>
+            <th style="padding: var(--space-sm);">{{ 'customer.orders.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for order in customer.orders -%}
+            <tr style="border-bottom: 1px solid var(--neutral-200);">
+              <td style="padding: var(--space-sm);"><a href="{{ order.customer_url }}" style="color: var(--green-700);">{{ order.name }}</a></td>
+              <td style="padding: var(--space-sm);">{{ order.created_at | date: "%B %d, %Y" }}</td>
+              <td style="padding: var(--space-sm);">{{ order.total_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    {%- else -%}
+      <p class="text-muted">{{ 'customer.orders.none' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>

@@ -1,0 +1,22 @@
+{% layout 'theme' %}
+
+<section class="section section-padding">
+  <div class="page-width" style="max-width: 480px;">
+    <h1 class="text-h1 text-center mb-lg">{{ 'customer.login.title' | t }}</h1>
+    {%- form 'customer_login' -%}
+      {{ form.errors | default_errors }}
+      <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <div>
+          <label for="email" class="text-body-sm" style="display: block; margin-bottom: var(--space-xs);">{{ 'customer.login.email' | t }}</label>
+          <input type="email" name="customer[email]" id="email" class="input" required autocomplete="email">
+        </div>
+        <div>
+          <label for="password" class="text-body-sm" style="display: block; margin-bottom: var(--space-xs);">{{ 'customer.login.password' | t }}</label>
+          <input type="password" name="customer[password]" id="password" class="input" required>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ 'customer.login.sign_in' | t }}</button>
+        <a href="/account/register" class="btn btn-ghost text-center">{{ 'customer.login.create_account' | t }}</a>
+      </div>
+    {%- endform -%}
+  </div>
+</section>

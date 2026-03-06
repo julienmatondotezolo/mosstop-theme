@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "Over Mosstop",
+        "text": "<p>Mosstop is geboren uit een passie voor natuur en huidverzorging. Wij geloven dat de kracht van mos een verschil kan maken voor jouw huid — 100% natuurlijk, duurzaam en met liefde gemaakt in België.</p>",
+        "image_position": "left",
+        "background": "white"
+      }
+    },
+    "mission": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Onze missie",
+        "text": "<p>Wij willen de wereld laten zien dat effectieve huidverzorging niet ten koste hoeft te gaan van de natuur. Elk product wordt zorgvuldig samengesteld met de zuiverste ingrediënten, dermatologisch getest en duurzaam verpakt.</p>",
+        "background": "green"
+      }
+    },
+    "values": {
+      "type": "benefits",
+      "settings": {
+        "heading": "Onze waarden"
+      },
+      "blocks": {
+        "v1": { "type": "benefit", "settings": { "icon": "leaf", "title": "Natuurlijk", "text": "Alleen ingrediënten rechtstreeks uit de natuur." } },
+        "v2": { "type": "benefit", "settings": { "icon": "shield", "title": "Veilig", "text": "Dermatologisch getest voor alle huidtypes." } },
+        "v3": { "type": "benefit", "settings": { "icon": "truck", "title": "Lokaal", "text": "Gemaakt en verzonden vanuit België." } },
+        "v4": { "type": "benefit", "settings": { "icon": "clock", "title": "Duurzaam", "text": "Recyclebare verpakkingen, minimale impact." } }
+      },
+      "block_order": ["v1", "v2", "v3", "v4"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "heading": "Ontdek onze producten",
+        "text": "Ervaar zelf de kracht van mos.",
+        "button_text": "Bekijk collectie",
+        "button_url": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "mission", "values", "cta"]
+}

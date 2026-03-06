@@ -1,0 +1,27 @@
+{%- comment -%}
+  Usage: {% render 'price', product: product %}
+  or:    {% render 'price', variant: variant %}
+{%- endcomment -%}
+
+{%- liquid
+  if variant
+    assign current_price = variant.price
+    assign compare_price = variant.compare_at_price
+    assign available = variant.available
+  elsif product
+    assign current_price = product.price
+    assign compare_price = product.compare_at_price
+    assign available = product.available
+  endif
+-%}
+
+<div class="price{% unless available %} price--sold-out{% endunless %}">
+  {%- if available -%}
+    {%- if compare_price > current_price -%}
+      <s class="price__compare text-body-sm text-muted">{{ compare_price | money }}</s>
+    {%- endif -%}
+    <span class="price__current text-h3" style="color: var(--green-700);">{{ current_price | money }}</span>
+  {%- else -%}
+    <span class="price__current text-body text-muted">{{ 'product.sold_out' | t }}</span>
+  {%- endif -%}
+</div>

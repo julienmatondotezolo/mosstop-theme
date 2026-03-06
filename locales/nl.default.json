@@ -1,0 +1,178 @@
+{
+  "general": {
+    "skip_to_content": "Ga naar inhoud",
+    "menu": "Menu",
+    "close": "Sluiten",
+    "search": "Zoeken",
+    "share": "Delen",
+    "loading": "Laden...",
+    "404_title": "Pagina niet gevonden",
+    "404_text": "De pagina die je zoekt bestaat niet of is verplaatst.",
+    "404_button": "Terug naar startpagina"
+  },
+  "header": {
+    "shop": "Shop",
+    "about": "Over ons",
+    "contact": "Contact",
+    "cart": "Winkelwagen"
+  },
+  "footer": {
+    "quick_links": "Snelle links",
+    "customer_service": "Klantenservice",
+    "follow_us": "Volg ons",
+    "privacy_policy": "Privacybeleid",
+    "terms": "Algemene voorwaarden",
+    "shipping_info": "Verzendinfo",
+    "returns": "Retourneren",
+    "newsletter_title": "Blijf op de hoogte",
+    "newsletter_placeholder": "Jouw e-mailadres",
+    "newsletter_button": "Inschrijven",
+    "copyright": "© {{ year }} Mosstop. Alle rechten voorbehouden."
+  },
+  "hero": {
+    "badge": "100% Natuurlijk",
+    "heading": "De kracht van mos voor jouw huid",
+    "subheading": "Ontdek onze natuurlijke mosverzorging, met zorg samengesteld voor een stralende huid.",
+    "cta_primary": "Ontdek nu",
+    "cta_secondary": "Meer info"
+  },
+  "benefits": {
+    "heading": "Waarom Mosstop?",
+    "benefit_1_title": "100% Natuurlijk",
+    "benefit_1_text": "Alleen de zuiverste ingrediënten uit de natuur.",
+    "benefit_2_title": "Dermatologisch getest",
+    "benefit_2_text": "Veilig en geschikt voor elke huidtype.",
+    "benefit_3_title": "Snelle levering",
+    "benefit_3_text": "Gratis verzending vanaf €50 in België.",
+    "benefit_4_title": "Duurzaam verpakt",
+    "benefit_4_text": "Recyclebare materialen, minimale afval."
+  },
+  "how_it_works": {
+    "heading": "Hoe werkt het?",
+    "step_1_title": "Kies je product",
+    "step_1_text": "Bekijk ons assortiment en vind de perfecte verzorging.",
+    "step_2_title": "Bestel online",
+    "step_2_text": "Veilig betalen en snel geleverd aan huis.",
+    "step_3_title": "Geniet van resultaat",
+    "step_3_text": "Ervaar de kracht van mos op je huid."
+  },
+  "testimonials": {
+    "heading": "Wat klanten zeggen"
+  },
+  "faq": {
+    "heading": "Veelgestelde vragen"
+  },
+  "cta_banner": {
+    "heading": "Klaar om te ontdekken?",
+    "text": "Probeer Mosstop vandaag nog en voel het verschil.",
+    "button": "Shop nu"
+  },
+  "product": {
+    "add_to_cart": "In winkelwagen",
+    "sold_out": "Uitverkocht",
+    "unavailable": "Niet beschikbaar",
+    "quantity": "Aantal",
+    "description": "Beschrijving",
+    "price": "Prijs",
+    "compare_at_price": "Oorspronkelijke prijs",
+    "vendor": "Merk",
+    "sku": "SKU",
+    "share": "Deel dit product",
+    "view": "Bekijken"
+  },
+  "collection": {
+    "heading": "Collectie",
+    "products_count": "{{ count }} producten",
+    "no_products": "Geen producten gevonden.",
+    "all": "Alle producten"
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "empty": "Je winkelwagen is leeg.",
+    "continue_shopping": "Verder winkelen",
+    "subtotal": "Subtotaal",
+    "checkout": "Afrekenen",
+    "remove": "Verwijderen",
+    "note_label": "Opmerking bij bestelling",
+    "note_placeholder": "Speciale instructies voor je bestelling...",
+    "shipping_note": "Verzendkosten worden berekend bij het afrekenen.",
+    "update": "Bijwerken"
+  },
+  "contact": {
+    "heading": "Neem contact op",
+    "text": "Heb je een vraag? Vul het formulier in en we nemen zo snel mogelijk contact met je op.",
+    "name": "Naam",
+    "email": "E-mailadres",
+    "message": "Bericht",
+    "send": "Verstuur",
+    "success": "Bedankt! We nemen snel contact met je op."
+  },
+  "accessibility": {
+    "skip_to_content": "Ga naar inhoud",
+    "close_menu": "Menu sluiten",
+    "open_menu": "Menu openen",
+    "increase_quantity": "Aantal verhogen",
+    "decrease_quantity": "Aantal verlagen",
+    "remove_item": "Item verwijderen"
+  },
+  "announcement": {
+    "text": "Gratis verzending vanaf €50 🌿"
+  },
+  "newsletter": {
+    "label": "E-mailadres",
+    "success": "Bedankt voor je inschrijving!"
+  },
+  "language": {
+    "label": "Taal"
+  },
+  "rich_text": {
+    "heading": "Over ons"
+  },
+  "image_with_text": {
+    "heading": "Onze missie"
+  },
+  "customer": {
+    "account": {
+      "title": "Mijn account"
+    },
+    "log_out": "Uitloggen",
+    "login": {
+      "title": "Inloggen",
+      "email": "E-mailadres",
+      "password": "Wachtwoord",
+      "sign_in": "Inloggen",
+      "create_account": "Account aanmaken"
+    },
+    "register": {
+      "title": "Account aanmaken",
+      "first_name": "Voornaam",
+      "last_name": "Achternaam",
+      "email": "E-mailadres",
+      "password": "Wachtwoord",
+      "submit": "Registreren"
+    },
+    "orders": {
+      "title": "Bestellingen",
+      "order_number": "Bestelling",
+      "date": "Datum",
+      "total": "Totaal",
+      "none": "Je hebt nog geen bestellingen geplaatst."
+    },
+    "order": {
+      "title": "Bestelling {{ name }}",
+      "product": "Product",
+      "quantity": "Aantal",
+      "subtotal": "Subtotaal",
+      "total": "Totaal"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Cadeaubon",
+      "subtext": "Hier is je cadeaubon!",
+      "expired": "Verlopen",
+      "shop_link": "Ga naar de winkel",
+      "add_to_apple_wallet": "Voeg toe aan Apple Wallet"
+    }
+  }
+}

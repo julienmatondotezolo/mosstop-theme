@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Neem contact op",
+        "text": "Heb je een vraag? Vul het formulier in en we nemen zo snel mogelijk contact met je op."
+      }
+    }
+  },
+  "order": ["main"]
+}

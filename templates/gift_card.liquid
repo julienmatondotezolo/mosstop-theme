@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ localization.language.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ 'gift_cards.issued.title' | t }} – {{ shop.name }}</title>
+  {{ 'design-tokens.css' | asset_url | stylesheet_tag }}
+  {{ 'typography.css' | asset_url | stylesheet_tag }}
+  {{ 'components.css' | asset_url | stylesheet_tag }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body>
+  <div class="page-width" style="padding-block: var(--space-3xl); text-align: center;">
+    <h1 class="text-h1" style="margin-bottom: var(--space-lg);">{{ shop.name }}</h1>
+
+    <div class="card" style="max-width: 480px; margin-inline: auto; padding: var(--space-xl);">
+      <h2 class="text-h3" style="margin-bottom: var(--space-md);">{{ 'gift_cards.issued.subtext' | t }}</h2>
+
+      {%- if gift_card.image -%}
+        <img src="{{ gift_card.image | image_url: width: 400 }}" alt="" style="margin-bottom: var(--space-md); border-radius: var(--radius-md);" width="400">
+      {%- endif -%}
+
+      <div style="margin-bottom: var(--space-md);">
+        <p class="text-h2" style="color: var(--green-700);">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.initial_value != gift_card.balance -%}
+          <p class="text-body-sm text-muted">{{ gift_card.initial_value | money }}</p>
+        {%- endif -%}
+      </div>
+
+      <div style="
+        background: var(--neutral-100);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-md);
+        font-size: var(--font-size-h3);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0.1em;
+      ">
+        {{ gift_card.code | format_code }}
+      </div>
+
+      {%- if gift_card.expired -%}
+        <p class="badge badge-error">{{ 'gift_cards.issued.expired' | t }}</p>
+      {%- endif -%}
+
+      {%- if gift_card.enabled -%}
+        <a href="{{ shop.url }}" class="btn btn-primary" style="margin-top: var(--space-md);">{{ 'gift_cards.issued.shop_link' | t }}</a>
+      {%- endif -%}
+
+      <p class="text-caption text-muted" style="margin-top: var(--space-md);">
+        {%- if gift_card.pass_url -%}
+          <a href="{{ gift_card.pass_url }}">{{ 'gift_cards.issued.add_to_apple_wallet' | t }}</a>
+        {%- endif -%}
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{%- comment -%}
+  Usage: {% render 'cart-item', item: item %}
+{%- endcomment -%}
+
+<div class="cart-item" style="
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: var(--space-md);
+  align-items: center;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--neutral-200);
+">
+  <a href="{{ item.url }}" style="border-radius: var(--radius-md); overflow: hidden;">
+    {%- if item.image -%}
+      <img
+        src="{{ item.image | image_url: width: 160 }}"
+        alt="{{ item.image.alt | default: item.product.title }}"
+        width="80"
+        height="80"
+        loading="lazy"
+        style="width: 80px; height: 80px; object-fit: cover;"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+
+  <div>
+    <a href="{{ item.url }}" class="text-body" style="font-weight: var(--font-weight-semibold);">
+      {{ item.product.title }}
+    </a>
+    {%- unless item.product.has_only_default_variant -%}
+      <p class="text-body-sm text-muted">{{ item.variant.title }}</p>
+    {%- endunless -%}
+    <p class="text-body-sm" style="color: var(--green-700); margin-top: var(--space-xs);">
+      {{ item.final_line_price | money }}
+    </p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-sm);">
+    {% render 'quantity-selector', id: item.key, value: item.quantity, name: 'updates[]', cart_key: item.key %}
+    <a
+      href="/cart/change?id={{ item.key }}&quantity=0"
+      class="text-caption text-muted"
+      style="text-decoration: underline;"
+      aria-label="{{ 'accessibility.remove_item' | t }}"
+    >
+      {{ 'cart.remove' | t }}
+    </a>
+  </div>
+</div>
