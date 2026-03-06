@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--white);
+  background-color: var(--neutral-100);
   color: var(--neutral-900);
 }
 
@@ -256,6 +256,62 @@ select {
 @media (max-width: 768px) {
   .section-padding {
     padding-block: var(--section-padding-mobile);
+  }
+}
+
+/* === Accessibility: Focus Indicators === */
+:focus-visible {
+  outline: 3px solid var(--accent-warm);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible,
+.product-card:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--accent-warm);
+  outline-offset: 2px;
+}
+
+/* Remove default outline when not keyboard-navigating */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* === High Contrast Mode === */
+@media (prefers-contrast: high) {
+  .card,
+  .product-card {
+    border: 2px solid var(--neutral-900);
+  }
+
+  .btn-primary {
+    border: 2px solid var(--neutral-900);
+  }
+
+  .trust-bar {
+    border-bottom: 2px solid var(--neutral-900);
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
 

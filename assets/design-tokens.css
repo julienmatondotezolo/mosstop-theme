@@ -5,20 +5,20 @@
    ============================================ */
 
 :root {
-  /* ---- Colors: Primary Green (Monochromatic) ---- */
-  --green-900: #1B5E20;
-  --green-700: #2E7D32;
-  --green-500: #43A047;
-  --green-300: #81C784;
-  --green-100: #C8E6C9;
-  --green-50:  #E8F5E9;
+  /* ---- Colors: Luxury Forest Palette ---- */
+  --green-900: #1E3A2B;    /* Forest deepest */
+  --green-700: #2D4A3A;    /* Forest deep — primary */
+  --green-500: #3D6B52;    /* Forest mid */
+  --green-300: #8FA68E;    /* Sage mist — secondary */
+  --green-100: #D4E4D3;    /* Sage light */
+  --green-50:  #EDF3EC;    /* Sage whisper */
 
-  /* ---- Colors: Neutrals ---- */
-  --neutral-900: #1A1A1A;
-  --neutral-700: #424242;
-  --neutral-500: #757575;
-  --neutral-300: #E0E0E0;
-  --neutral-100: #F5F5F5;
+  /* ---- Colors: Neutrals (warm-tinted) ---- */
+  --neutral-900: #1C1C1C;  /* Rich black — premium readability */
+  --neutral-700: #3D3D3D;
+  --neutral-500: #6B6B6B;
+  --neutral-300: #D5D0CB;  /* Warm gray */
+  --neutral-100: #F7F5F3;  /* Whisper cream — spa-like background */
   --white:       #FFFFFF;
 
   /* ---- Colors: Functional ---- */
@@ -27,12 +27,12 @@
   --info:    #0284C7;
 
   /* ---- Colors: Accent ---- */
-  --accent-warm: #D4A853;
+  --accent-warm: #C9A876;  /* Warm gold — luxury touch */
 
   /* ---- Gradients ---- */
-  --gradient-hero:    linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
-  --gradient-light:   linear-gradient(180deg, #E8F5E9 0%, #FFFFFF 100%);
-  --gradient-affiche: linear-gradient(180deg, #43A047 0%, #81C784 50%, #C8E6C9 100%);
+  --gradient-hero:    linear-gradient(135deg, #2D4A3A 0%, #1E3A2B 100%);
+  --gradient-light:   linear-gradient(180deg, #EDF3EC 0%, #F7F5F3 100%);
+  --gradient-affiche: linear-gradient(180deg, #3D6B52 0%, #8FA68E 50%, #D4E4D3 100%);
 
   /* ---- Glassmorphism ---- */
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -71,7 +71,8 @@
   --shadow-xl:    0 20px 50px rgba(0, 0, 0, 0.12);
   --shadow-2xl:   0 25px 60px rgba(0, 0, 0, 0.18);
   --shadow-soft:  0 2px 20px rgba(0, 0, 0, 0.06);
-  --shadow-green: 0 4px 14px rgba(46, 125, 50, 0.3);
+  --shadow-green: 0 4px 14px rgba(45, 74, 58, 0.3);
+  --shadow-gold:  0 4px 14px rgba(201, 168, 118, 0.25);
 
   /* ---- Motion ---- */
   --duration-micro:    200ms;
@@ -83,6 +84,8 @@
 
   /* ---- Typography ---- */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Montserrat', 'Inter', sans-serif;
+  --font-accent: 'Playfair Display', Georgia, serif;
 
   /* Font sizes — premium scale */
   --text-display-lg: 80px;

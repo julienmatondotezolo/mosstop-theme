@@ -114,6 +114,9 @@
           </div>
         </div>
 
+        {%- comment -%} Certifications {%- endcomment -%}
+        {% render 'trust-certifications', layout: 'compact' %}
+
         {%- comment -%} Why you'll love it {%- endcomment -%}
         {%- if product.metafields.custom.highlights != blank -%}
           <div class="product-page__highlights">

@@ -232,7 +232,7 @@ textarea.input {
 
 .trust-badge:hover .trust-badge-icon {
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
+  box-shadow: 0 4px 12px rgba(45, 74, 58, 0.15);
 }
 
 .trust-badge-icon svg {

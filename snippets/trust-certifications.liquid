@@ -1,0 +1,100 @@
+{%- comment -%}
+  Trust certification badges — used on homepage, product, and cart pages
+  Usage: {% render 'trust-certifications' %}
+  Optional: {% render 'trust-certifications', layout: 'compact' %}
+{%- endcomment -%}
+
+<div class="certifications {% if layout == 'compact' %}certifications--compact{% endif %}">
+  <div class="certification">
+    <div class="certification__icon">
+      {% render 'icon', name: 'dermatologist', size: 24 %}
+    </div>
+    <span class="certification__label">{{ 'trust.dermatologist' | t | default: 'Dermatoloog Goedgekeurd' }}</span>
+  </div>
+  <div class="certification">
+    <div class="certification__icon">
+      {% render 'icon', name: 'vegan', size: 24 %}
+    </div>
+    <span class="certification__label">{{ 'trust.vegan' | t | default: 'Vegan & Cruelty-Free' }}</span>
+  </div>
+  <div class="certification">
+    <div class="certification__icon">
+      {% render 'icon', name: 'guarantee', size: 24 %}
+    </div>
+    <span class="certification__label">{{ 'trust.guarantee' | t | default: '30 Dagen Garantie' }}</span>
+  </div>
+  <div class="certification">
+    <div class="certification__icon">
+      {% render 'icon', name: 'eu-privacy', size: 24 %}
+    </div>
+    <span class="certification__label">{{ 'trust.eu_privacy' | t | default: 'EU Privacy Conform' }}</span>
+  </div>
+</div>
+
+<style>
+  .certifications {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+    padding: var(--space-xl) 0;
+  }
+
+  .certifications--compact {
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+  }
+
+  .certification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .certifications--compact .certification {
+    flex-direction: row;
+    gap: var(--space-xs);
+  }
+
+  .certification__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: var(--green-50);
+    color: var(--green-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--green-100);
+  }
+
+  .certifications--compact .certification__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .certification__label {
+    font-size: var(--text-caption);
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-700);
+    max-width: 120px;
+  }
+
+  .certifications--compact .certification__label {
+    font-size: 11px;
+    max-width: none;
+  }
+
+  @media (max-width: 768px) {
+    .certifications {
+      gap: var(--space-lg);
+    }
+    .certification__icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

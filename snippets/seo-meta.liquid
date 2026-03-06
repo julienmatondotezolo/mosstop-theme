@@ -1,0 +1,97 @@
+{%- if template.name == 'product' -%}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title }}">
+  <meta property="og:description" content="{{ product.description | strip_html | truncate: 200 }}">
+  {%- if product.featured_image -%}
+    <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+  {%- endif -%}
+  <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+  <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+
+  {%- comment -%} Schema.org Product structured data {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 5000 | json }},
+      "url": "{{ canonical_url }}",
+      {%- if product.featured_image -%}
+        "image": "https:{{ product.featured_image | image_url: width: 1200 }}",
+      {%- endif -%}
+      {%- if product.vendor != blank -%}
+        "brand": {
+          "@type": "Brand",
+          "name": {{ product.vendor | json }}
+        },
+      {%- endif -%}
+      "offers": {
+        "@type": "Offer",
+        "price": "{{ product.price | money_without_currency | strip_html }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url": "{{ canonical_url }}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        }
+      }
+    }
+  </script>
+
+{%- elsif template.name == 'collection' -%}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ collection.title }}">
+  <meta property="og:description" content="{{ collection.description | strip_html | truncate: 200 }}">
+  {%- if collection.image -%}
+    <meta property="og:image" content="https:{{ collection.image | image_url: width: 1200 }}">
+  {%- endif -%}
+
+  {%- comment -%} Schema.org CollectionPage {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "description": {{ collection.description | strip_html | truncate: 5000 | json }},
+      "url": "{{ canonical_url }}"
+    }
+  </script>
+
+{%- else -%}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_description | default: shop.description }}">
+{%- endif -%}
+
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ shop.name }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{%- if page_description -%}
+  <meta name="description" content="{{ page_description }}">
+{%- endif -%}
+
+{%- comment -%} Schema.org Organization (site-wide) {%- endcomment -%}
+{%- if template.name == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": "{{ shop.url }}",
+      "description": {{ shop.description | json }}
+      {%- if settings.social_facebook != blank or settings.social_instagram != blank -%}
+        ,"sameAs": [
+          {%- if settings.social_facebook != blank -%}"{{ settings.social_facebook }}"{% endif %}
+          {%- if settings.social_instagram != blank -%}{% if settings.social_facebook != blank %},{% endif %}"{{ settings.social_instagram }}"{% endif %}
+          {%- if settings.social_tiktok != blank -%}{% if settings.social_facebook != blank or settings.social_instagram != blank %},{% endif %}"{{ settings.social_tiktok }}"{% endif %}
+        ]
+      {%- endif -%}
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Hreflang for multi-language (NL-NL, NL-BE, FR, EN) {%- endcomment -%}
+{%- for locale in shop.published_locales -%}
+  <link rel="alternate" hreflang="{{ locale.iso_code | downcase }}" href="{{ canonical_url | replace: '/' | append: '/' }}{% if locale.primary == false %}{{ locale.iso_code | downcase }}/{% endif %}">
+{%- endfor -%}
