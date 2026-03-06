@@ -1,0 +1,55 @@
+{%- paginate collection.products by 12 -%}
+<section class="section section-padding">
+  <div class="page-width">
+
+    {%- comment -%} Collection hero banner {%- endcomment -%}
+    <div class="collection-hero reveal" style="
+      background: var(--gradient-light);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl) var(--space-2xl);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    ">
+      <span class="text-overline text-primary" style="display: block; margin-bottom: var(--space-sm);">{{ 'collection.overline' | t | default: 'Collectie' }}</span>
+      <h1 class="text-h1">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="text-body-lg text-secondary mt-md max-w-wide">{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collection.products.size > 0 -%}
+      {%- comment -%} Filter/sort bar {%- endcomment -%}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+        <p class="text-body-sm text-muted">{{ collection.products_count }} {{ 'collection.product_count' | t | default: 'producten' }}</p>
+      </div>
+
+      <div class="grid grid-3" style="gap: var(--space-lg);">
+        {%- for product in collection.products -%}
+          <div class="reveal" style="--reveal-delay: {{ forloop.index0 | modulo: 3 | times: 100 }}ms;">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="mt-lg text-center" aria-label="Pagination">
+          {{ paginate | default_pagination: next: '→', previous: '←' }}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <p>{{ 'collection.no_products' | t }}</p>
+        <a href="/" class="btn btn-primary">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

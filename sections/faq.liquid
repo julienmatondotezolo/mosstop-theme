@@ -1,0 +1,123 @@
+<section class="section section-padding bg-neutral-100">
+  <div class="page-width" style="max-width: 800px;">
+    <div class="text-center" style="margin-bottom: var(--space-2xl);">
+      <span class="text-overline text-primary" style="display: block; margin-bottom: var(--space-sm);">{{ 'faq.overline' | t | default: 'Hulp nodig?' }}</span>
+      <h2 class="text-h2 reveal">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+      {%- for block in section.blocks -%}
+        <div class="faq-item reveal" {{ block.shopify_attributes }} style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms;">
+          <button
+            class="faq-item__trigger"
+            data-accordion-trigger
+            aria-expanded="false"
+          >
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-item__chevron" aria-hidden="true">
+              {% render 'icon', name: 'chevron', size: 20 %}
+            </span>
+          </button>
+          <div class="faq-item__content" hidden>
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    border-left: 3px solid transparent;
+    transition: border-color var(--duration-standard) var(--easing), box-shadow var(--duration-standard) var(--easing);
+  }
+
+  .faq-item.is-active {
+    border-left-color: var(--green-500);
+    box-shadow: var(--shadow-md);
+  }
+
+  .faq-item__trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) var(--space-xl);
+    text-align: left;
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-900);
+    background: var(--white);
+    cursor: pointer;
+    border: none;
+    gap: var(--space-md);
+  }
+
+  .faq-item__chevron {
+    flex-shrink: 0;
+    transition: transform var(--duration-standard) var(--easing);
+    color: var(--neutral-500);
+  }
+
+  .faq-item__trigger[aria-expanded="true"] .faq-item__chevron {
+    transform: rotate(180deg);
+    color: var(--green-700);
+  }
+
+  .faq-item__content {
+    padding: 0 var(--space-xl) var(--space-lg);
+    color: var(--neutral-700);
+    line-height: 1.75;
+    overflow: hidden;
+    transition: max-height var(--duration-standard) var(--easing), padding var(--duration-standard) var(--easing);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Veelgestelde vragen"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Wat maakt Mosstop uniek?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Mosstop gebruikt 100% natuurlijke mosingrediënten, zorgvuldig geselecteerd voor hun heilzame eigenschappen voor de huid.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Wat maakt Mosstop uniek?", "answer": "<p>Mosstop gebruikt 100% natuurlijke mosingrediënten, zorgvuldig geselecteerd voor hun heilzame eigenschappen voor de huid.</p>" } },
+        { "type": "question", "settings": { "question": "Is het geschikt voor gevoelige huid?", "answer": "<p>Ja! Al onze producten zijn dermatologisch getest en geschikt voor alle huidtypes, inclusief de gevoelige huid.</p>" } },
+        { "type": "question", "settings": { "question": "Hoe snel wordt mijn bestelling geleverd?", "answer": "<p>Bestellingen worden binnen 1-2 werkdagen verzonden. Gratis verzending vanaf €50 in België.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

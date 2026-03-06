@@ -1,0 +1,89 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<header class="header{% if template.name == 'index' %} header--transparent{% endif %}" role="banner" data-header>
+  <div class="page-width header__inner">
+    {%- comment -%} Logo {%- endcomment -%}
+    <a href="/" class="header__logo" aria-label="{{ shop.name }}">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: settings.logo_width | default: 140 }}"
+          alt="{{ shop.name }}"
+          width="{{ settings.logo_width | default: 140 }}"
+          height="{{ settings.logo_width | default: 140 | divided_by: 2 }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="text-h3" style="color: var(--green-700); font-weight: var(--weight-bold);">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Desktop nav {%- endcomment -%}
+    <nav class="header__nav" aria-label="Main navigation">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="header__nav-link{% if link.active %} active{% endif %}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/collections/all" class="header__nav-link">{{ 'header.shop' | t }}</a>
+        <a href="/pages/about" class="header__nav-link">{{ 'header.about' | t }}</a>
+        <a href="/pages/contact" class="header__nav-link">{{ 'header.contact' | t }}</a>
+      {%- endif -%}
+    </nav>
+
+    {%- comment -%} Actions {%- endcomment -%}
+    <div class="header__actions">
+      {% render 'language-switcher' %}
+
+      <a href="/cart" class="header__cart-link" aria-label="{{ 'header.cart' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="header__cart-count" data-cart-count hidden>0</span>
+      </a>
+
+      <button
+        id="mobile-menu-toggle"
+        class="header__menu-toggle"
+        aria-label="{{ 'accessibility.open_menu' | t }}"
+        aria-expanded="false"
+        aria-controls="mobile-menu-drawer"
+      >
+        {% render 'icon', name: 'menu' %}
+      </button>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile drawer {%- endcomment -%}
+<div id="mobile-menu-drawer" class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="{{ 'general.menu' | t }}">
+  <div class="mobile-drawer__overlay"></div>
+  <div class="mobile-drawer__panel">
+    <button id="mobile-menu-close" class="mobile-drawer__close" aria-label="{{ 'accessibility.close_menu' | t }}">
+      {% render 'icon', name: 'close' %}
+    </button>
+    <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="mobile-drawer__link">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/collections/all" class="mobile-drawer__link">{{ 'header.shop' | t }}</a>
+        <a href="/pages/about" class="mobile-drawer__link">{{ 'header.about' | t }}</a>
+        <a href="/pages/contact" class="mobile-drawer__link">{{ 'header.contact' | t }}</a>
+      {%- endif -%}
+    </nav>
+    {% render 'language-switcher' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

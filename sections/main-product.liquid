@@ -1,0 +1,148 @@
+{{ 'section-product.css' | asset_url | stylesheet_tag }}
+
+<section class="section section-padding">
+  <div class="page-width">
+
+    {%- comment -%} Breadcrumb {%- endcomment -%}
+    <nav class="product-page__breadcrumb" style="margin-bottom: var(--space-lg);">
+      <a href="/">{{ 'general.home' | t | default: 'Home' }}</a>
+      <span>/</span>
+      {%- if collection -%}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+        <span>/</span>
+      {%- endif -%}
+      <span style="color: var(--neutral-900);">{{ product.title }}</span>
+    </nav>
+
+    <div class="product-page">
+
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="product-page__gallery">
+        <div class="product-page__main-image">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 900 }}"
+              alt="{{ product.featured_image.alt | default: product.title }}"
+              width="900"
+              height="900"
+              loading="eager"
+              id="product-main-image"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-page__thumbs">
+            {%- for image in product.images -%}
+              <button
+                class="product-page__thumb{% if forloop.first %} active{% endif %}"
+                onclick="document.getElementById('product-main-image').src='{{ image | image_url: width: 900 }}'; document.querySelectorAll('.product-page__thumb').forEach(t=>t.classList.remove('active')); this.classList.add('active');"
+                aria-label="Image {{ forloop.index }}"
+              >
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | default: product.title }}" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product info {%- endcomment -%}
+      <div class="product-page__info">
+        {%- if product.vendor != blank -%}
+          <p class="product-page__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="product-page__title">{{ product.title }}</h1>
+
+        {% render 'price', product: product %}
+
+        {%- form 'product', product, id: 'product-form' -%}
+          <div class="product-page__form">
+            {%- unless product.has_only_default_variant -%}
+              <div>
+                <label for="variant-select" class="text-body-sm" style="display: block; margin-bottom: var(--space-xs);">
+                  {{ 'product.quantity' | t }}
+                </label>
+                <select name="id" id="variant-select" class="product-page__variant-select">
+                  {%- for variant in product.variants -%}
+                    <option
+                      value="{{ variant.id }}"
+                      {% unless variant.available %}disabled{% endunless %}
+                      {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                    >
+                      {{ variant.title }}{% unless variant.available %} — {{ 'product.sold_out' | t }}{% endunless %}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- else -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {%- endunless -%}
+
+            <div class="product-page__actions">
+              {% render 'quantity-selector', id: 'product-qty', value: 1 %}
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="flex: 1;"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                {%- if product.available -%}
+                  {{ 'product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'product.sold_out' | t }}
+                {%- endif -%}
+              </button>
+            </div>
+          </div>
+        {%- endform -%}
+
+        {%- comment -%} Trust badges under add to cart {%- endcomment -%}
+        <div class="product-page__trust-row">
+          <div class="product-page__trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            {{ 'product.trust_guarantee' | t | default: 'Tevredenheidsgarantie' }}
+          </div>
+          <div class="product-page__trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            {{ 'product.trust_shipping' | t | default: 'Gratis verzending €50+' }}
+          </div>
+          <div class="product-page__trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            {{ 'product.trust_returns' | t | default: '14 dagen retour' }}
+          </div>
+        </div>
+
+        {%- comment -%} Why you'll love it {%- endcomment -%}
+        {%- if product.metafields.custom.highlights != blank -%}
+          <div class="product-page__highlights">
+            <h4>{{ 'product.why_love_it' | t | default: 'Waarom je dit geweldig vindt' }}</h4>
+            <ul>
+              {%- assign highlights = product.metafields.custom.highlights | split: '|' -%}
+              {%- for highlight in highlights -%}
+                <li>{{ highlight | strip }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if product.description != blank -%}
+          <div class="product-page__description">
+            <h3 class="text-h4">{{ 'product.description' | t }}</h3>
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

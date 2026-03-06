@@ -1,0 +1,102 @@
+/* === Cart Page — Premium === */
+.cart-page {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.cart-summary {
+  position: sticky;
+  top: 96px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.cart-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-summary__total {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  color: var(--green-700);
+}
+
+/* Free shipping progress bar */
+.cart-progress {
+  padding: var(--space-md);
+  background: var(--green-50);
+  border-radius: var(--radius-lg);
+}
+
+.cart-progress__text {
+  font-size: var(--text-body-sm);
+  color: var(--neutral-700);
+  margin-bottom: var(--space-sm);
+  text-align: center;
+}
+
+.cart-progress__bar {
+  height: 6px;
+  background: var(--green-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.cart-progress__fill {
+  height: 100%;
+  background: var(--green-500);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-standard) var(--easing);
+}
+
+/* Trust badges in summary */
+.cart-summary__trust {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--neutral-100);
+}
+
+.cart-summary__trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-caption);
+  color: var(--neutral-500);
+}
+
+.cart-summary__trust-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green-500);
+  flex-shrink: 0;
+}
+
+.cart-note textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .cart-page {
+    grid-template-columns: 1fr;
+  }
+  .cart-summary {
+    position: static;
+  }
+}

@@ -1,0 +1,92 @@
+{{ 'section-cart.css' | asset_url | stylesheet_tag }}
+
+<section class="section section-padding">
+  <div class="page-width">
+    <h1 class="text-h1 text-center mb-lg">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-page">
+
+        {%- comment -%} Cart items {%- endcomment -%}
+        <div>
+          {%- for item in cart.items -%}
+            {% render 'cart-item', item: item %}
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Cart summary {%- endcomment -%}
+        <div class="cart-summary">
+          {%- comment -%} Free shipping progress {%- endcomment -%}
+          {%- assign free_shipping_threshold = 5000 -%}
+          {%- assign remaining = free_shipping_threshold | minus: cart.total_price -%}
+          {%- assign progress_pct = cart.total_price | times: 100 | divided_by: free_shipping_threshold -%}
+          {%- if progress_pct > 100 -%}{%- assign progress_pct = 100 -%}{%- endif -%}
+          <div class="cart-progress">
+            {%- if remaining > 0 -%}
+              <p class="cart-progress__text">
+                {{ 'cart.free_shipping_remaining' | t | default: 'Nog' }} {{ remaining | money }} {{ 'cart.free_shipping_goal' | t | default: 'voor gratis verzending' }}
+              </p>
+            {%- else -%}
+              <p class="cart-progress__text" style="color: var(--green-700); font-weight: var(--weight-semibold);">
+                {{ 'cart.free_shipping_reached' | t | default: 'Gratis verzending!' }}
+              </p>
+            {%- endif -%}
+            <div class="cart-progress__bar">
+              <div class="cart-progress__fill" style="width: {{ progress_pct }}%;"></div>
+            </div>
+          </div>
+
+          <div class="cart-summary__row">
+            <span class="text-body">{{ 'cart.subtotal' | t }}</span>
+            <span class="cart-summary__total">{{ cart.total_price | money }}</span>
+          </div>
+          <p class="text-body-sm text-muted">{{ 'cart.shipping_note' | t }}</p>
+
+          <div class="cart-note">
+            <label for="cart-note" class="text-body-sm" style="display: block; margin-bottom: var(--space-xs);">
+              {{ 'cart.note_label' | t }}
+            </label>
+            <textarea id="cart-note" name="note" placeholder="{{ 'cart.note_placeholder' | t }}">{{ cart.note }}</textarea>
+          </div>
+
+          <a href="/checkout" class="btn btn-primary" style="width: 100%; text-align: center;">
+            {{ 'cart.checkout' | t }}
+          </a>
+          <a href="/collections/all" class="btn btn-ghost" style="width: 100%; text-align: center;">
+            {{ 'cart.continue_shopping' | t }}
+          </a>
+
+          {%- comment -%} Trust badges {%- endcomment -%}
+          <div class="cart-summary__trust">
+            <div class="cart-summary__trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              {{ 'cart.trust_secure' | t | default: 'Veilig afrekenen via SSL' }}
+            </div>
+            <div class="cart-summary__trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              {{ 'cart.trust_returns' | t | default: '14 dagen gratis retour' }}
+            </div>
+            <div class="cart-summary__trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              {{ 'cart.trust_guarantee' | t | default: 'Tevredenheidsgarantie' }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="text-body-lg">{{ 'cart.empty' | t }}</p>
+        <a href="/collections/all" class="btn btn-primary">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

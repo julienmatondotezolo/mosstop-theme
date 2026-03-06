@@ -1,0 +1,116 @@
+{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="hero">
+  {%- if section.settings.image != blank -%}
+    <div class="hero__bg">
+      <img
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+        width="1920"
+        height="1080"
+        loading="eager"
+        fetchpriority="high"
+      >
+      <div class="hero__overlay"></div>
+      <div class="hero__mesh"></div>
+    </div>
+  {%- else -%}
+    <div class="hero__bg">
+      <div class="hero__overlay" style="background: var(--gradient-hero);"></div>
+      <div class="hero__mesh"></div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Floating leaves {%- endcomment -%}
+  <div class="hero__leaf hero__leaf--1" aria-hidden="true">
+    <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+    </svg>
+  </div>
+  <div class="hero__leaf hero__leaf--2" aria-hidden="true">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+    </svg>
+  </div>
+
+  <div class="page-width hero__content">
+    {%- if section.settings.badge != blank -%}
+      <span class="hero__badge">{{ section.settings.badge }}</span>
+    {%- endif -%}
+    <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+    <p class="hero__text">{{ section.settings.text }}</p>
+    <div class="hero__actions">
+      {%- if section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="btn btn-primary">{{ section.settings.cta_text }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta2_url != blank -%}
+        <a href="{{ section.settings.cta2_url }}" class="btn btn-secondary">{{ section.settings.cta2_text }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Scroll indicator {%- endcomment -%}
+  <div class="hero__scroll-indicator" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge text",
+      "default": "100% Natuurlijk"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "De kracht van mos voor jouw huid"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Ontdek onze natuurlijke mosverzorging, met zorg samengesteld voor een stralende huid."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Primary button text",
+      "default": "Ontdek nu"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_text",
+      "label": "Secondary button text",
+      "default": "Meer info"
+    },
+    {
+      "type": "url",
+      "id": "cta2_url",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}

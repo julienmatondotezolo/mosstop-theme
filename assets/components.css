@@ -1,6 +1,7 @@
 /* ============================================
    Mosstop Components
    Buttons, cards, badges, inputs, trust badges
+   Premium Redesign 2026
    ============================================ */
 
 /* ---- Buttons ---- */
@@ -23,12 +24,13 @@
     background-color var(--duration-micro) var(--easing),
     box-shadow var(--duration-micro) var(--easing),
     transform var(--duration-micro) var(--easing),
-    border-color var(--duration-micro) var(--easing);
+    border-color var(--duration-micro) var(--easing),
+    text-shadow var(--duration-micro) var(--easing);
   text-decoration: none;
 }
 
 .btn-primary {
-  padding: 16px 32px;
+  padding: 18px 40px;
   background-color: var(--green-700);
   color: var(--white);
   border-color: var(--green-700);
@@ -39,6 +41,7 @@
   border-color: var(--green-500);
   box-shadow: var(--shadow-green);
   transform: translateY(-2px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:active {
@@ -49,7 +52,7 @@
 }
 
 .btn-secondary {
-  padding: 16px 32px;
+  padding: 18px 40px;
   background-color: transparent;
   color: var(--green-700);
   border-color: var(--green-700);
@@ -78,9 +81,9 @@
 
 .card {
   background-color: var(--white);
-  border: 1px solid var(--neutral-300);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
   padding: var(--space-lg);
   transition:
     box-shadow var(--duration-standard) var(--easing),
@@ -90,6 +93,16 @@
 .card:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
+}
+
+/* Glassmorphism card variant */
+.card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
 }
 
 /* ---- Input Fields ---- */
@@ -167,13 +180,32 @@ textarea.input {
   background-color: #E0F2FE;
 }
 
+/* Product badges */
+.badge-new {
+  color: var(--white);
+  background-color: var(--green-700);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-bestseller {
+  color: #78350F;
+  background-color: #FDE68A;
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 /* ---- Trust Badge Row ---- */
 
 .trust-badges {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
   flex-wrap: wrap;
 }
 
@@ -186,9 +218,21 @@ textarea.input {
 }
 
 .trust-badge-icon {
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
   color: var(--green-700);
+  background: var(--green-50);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: transform var(--duration-standard) var(--easing), box-shadow var(--duration-standard) var(--easing);
+}
+
+.trust-badge:hover .trust-badge-icon {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
 }
 
 .trust-badge-icon svg {
@@ -202,9 +246,9 @@ textarea.input {
 }
 
 .trust-badge-label {
-  font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
-  color: var(--neutral-700);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--neutral-900);
 }
 
 /* ---- Layout Utilities ---- */
@@ -250,15 +294,53 @@ textarea.input {
 
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(24px);
   transition:
     opacity var(--duration-entrance) var(--easing),
     transform var(--duration-entrance) var(--easing);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Directional reveals */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity var(--duration-entrance) var(--easing),
+    transform var(--duration-entrance) var(--easing);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity var(--duration-entrance) var(--easing),
+    transform var(--duration-entrance) var(--easing);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Divider ---- */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--neutral-300) 50%, transparent 100%);
+  margin-block: var(--space-xl);
 }
 
 /* ---- Language Switcher ---- */

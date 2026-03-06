@@ -1,0 +1,114 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer" role="contentinfo">
+  <div class="page-width">
+    <div class="footer__grid">
+
+      {%- comment -%} Column 1: Brand story {%- endcomment -%}
+      <div>
+        <h3 class="footer__heading footer__brand">{{ shop.name }}</h3>
+        <p class="footer__tagline">{{ section.settings.tagline | default: 'Natuurlijke mosproducten voor een stralende huid. Duurzaam, effectief en met liefde gemaakt in België.' }}</p>
+        <div class="footer__socials" style="margin-top: var(--space-lg);">
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="Facebook">
+              {% render 'icon', name: 'facebook', size: 20 %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+              {% render 'icon', name: 'instagram', size: 20 %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="TikTok">
+              {% render 'icon', name: 'tiktok', size: 20 %}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Column 2: Quick links {%- endcomment -%}
+      <div>
+        <h3 class="footer__heading">{{ 'footer.quick_links' | t }}</h3>
+        <nav class="footer__links" aria-label="{{ 'footer.quick_links' | t }}">
+          {%- if section.settings.footer_menu != blank -%}
+            {%- for link in section.settings.footer_menu.links -%}
+              <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+            {%- endfor -%}
+          {%- else -%}
+            <a href="/collections/all" class="footer__link">{{ 'header.shop' | t }}</a>
+            <a href="/pages/about" class="footer__link">{{ 'header.about' | t }}</a>
+            <a href="/pages/contact" class="footer__link">{{ 'header.contact' | t }}</a>
+          {%- endif -%}
+        </nav>
+      </div>
+
+      {%- comment -%} Column 3: Customer service {%- endcomment -%}
+      <div>
+        <h3 class="footer__heading">{{ 'footer.customer_service' | t }}</h3>
+        <nav class="footer__links">
+          <a href="/pages/shipping" class="footer__link">{{ 'footer.shipping_info' | t }}</a>
+          <a href="/pages/returns" class="footer__link">{{ 'footer.returns' | t }}</a>
+          <a href="/pages/privacy-policy" class="footer__link">{{ 'footer.privacy_policy' | t }}</a>
+          <a href="/pages/terms" class="footer__link">{{ 'footer.terms' | t }}</a>
+        </nav>
+      </div>
+
+      {%- comment -%} Column 4: Newsletter + Payments {%- endcomment -%}
+      <div>
+        <h3 class="footer__heading">{{ 'footer.newsletter_title' | t }}</h3>
+        {%- form 'customer', id: 'footer-newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="footer__newsletter-form">
+            <input
+              type="email"
+              name="contact[email]"
+              class="footer__newsletter-input"
+              placeholder="{{ 'footer.newsletter_placeholder' | t }}"
+              required
+              aria-label="{{ 'newsletter.label' | t }}"
+              autocomplete="email"
+            >
+            <button type="submit" class="footer__newsletter-btn">
+              {{ 'footer.newsletter_button' | t }}
+            </button>
+          </div>
+        {%- endform -%}
+
+        {%- comment -%} Payment icons {%- endcomment -%}
+        <div class="footer__payments">
+          <div class="footer__payment-icon">VISA</div>
+          <div class="footer__payment-icon">MC</div>
+          <div class="footer__payment-icon">BC</div>
+          <div class="footer__payment-icon">iDEAL</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'footer.rights' | t | default: 'Alle rechten voorbehouden.' }}</p>
+      {% render 'language-switcher' %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Brand tagline",
+      "default": "Natuurlijke mosproducten voor een stralende huid. Duurzaam, effectief en met liefde gemaakt in België."
+    }
+  ]
+}
+{% endschema %}
